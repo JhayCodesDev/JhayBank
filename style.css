@@ -1,0 +1,1271 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: #444;
+  background-color: #f3f3f3;
+  height: 100vh;
+}
+
+h1, h2, h3, h4, h5{
+  font-family: "Poppins", sans-serif;
+}
+
+/* This is the index.html styling */
+
+/* A hidden class  stylying*/
+.hide-content{
+  display: none;
+}
+
+.active{
+  display: block;
+  animation: dropBounce 0.6s ease;
+}
+
+.blur{
+  filter: blur(1rem);
+}
+
+/* dropBounce Animation calss styling */
+.drop-bounce{
+  animation: dropBounce 0.6s ease;
+}
+
+
+/* the first visit to the page styling */
+.first-visit{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.pass-view{
+  position: relative;
+  left: 1rem;
+  top: 0.1rem;
+  font-size: 1.5rem;
+}
+
+.pass-view:hover{
+  cursor: pointer;
+}
+
+.first-visit .first-intro {
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.first-visit img {
+  max-width: 15rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.first-visit input {
+  width: 10rem;
+  text-align: center;
+  border: none;
+  border-radius: 4rem;
+  height: 3rem;
+  color: #000;
+}
+
+.first-visit input::placeholder {
+  color: #000;
+}
+
+.first-visit .sign-up {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.first-visit .first--details{
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 3rem;
+  margin-left: -2rem;
+}
+
+.first-visit .second--details{
+  display: flex;
+  justify-content: center;
+}
+
+.first-visit .second--details .pass-view{
+  margin-top: 0.3rem;
+}
+
+.sign-up .btn-sign-up{
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  font-size: 5rem;
+}
+
+.first-visit .login{
+  margin-bottom: 10rem;
+}
+
+.first-visit .login--input{
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.first-visit .login .pass-view{
+  margin-top: 0.6rem;
+}
+
+.first-visit .login .btn-log-in{
+  text-align: center;
+  background: none;
+  border: none;
+  font-size: 5rem;
+  position: relative;
+  top: 3rem;
+}
+
+.first--button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.first--button button{
+  width: 10rem;
+  font-size: 1rem;
+  margin: 0 auto;
+  border: none;
+  background: #818cf8;
+  color: #fff;
+  border-radius: 3rem;
+  height: 5rem;
+  text-transform: capitalize;
+}
+
+.first-visit button:hover {
+  cursor: pointer;
+}
+
+
+/* this is the main-page-content styling */
+
+.main-page-content{
+  display: none;
+}
+
+header {
+  border-bottom: solid 0.1rem #444;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0.4rem;
+  margin-bottom: 4rem;
+}
+
+nav img {
+  max-width: 15rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.active-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0rem;
+  padding: 0rem;
+  color: #1f2937;
+  background: #fff;
+  z-index: 1000;
+}
+
+nav .main-nav-links{
+  height: 6rem;
+}
+
+nav .main-nav-links ul {
+  padding: 0.5rem;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  text-transform: capitalize;
+}
+
+nav .main-nav-links a {
+  text-decoration: none;
+  color: #6366f1;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+nav .main-nav-links a:hover {
+  color: #4f46e5;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.main-page-content header h1 {
+  font-size: 1.3rem;
+  text-align: left;
+  margin-top: 2rem;
+  text-transform: capitalize;
+  width: 57%;
+  margin: 0 auto;
+  line-height: 3em;
+}
+
+.main-page-content header h1 span,
+.main-page-content header strong {
+  padding: 0.8rem;
+  background: #818cf8;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.main-page-content header .intro {
+  padding: 2rem;
+  text-align: justify;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.main-page-content header .learn-more {
+  color: #4f46e5;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.main-page-content header .learn-more a {
+  color: #4f46e5;
+}
+
+.main-page-content header .learn-more a:hover {
+  color: #4f7cff;
+}
+
+.banner-one, .banner-two{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.banner-img2{
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+  top: -7rem;
+}
+
+.intro-img1{
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+} 
+
+.desktop-view{
+  display: none;
+}
+
+.intro-img2{
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.index-main .features {
+  padding: 3rem;
+  background: #eef2ff;
+}
+
+.index-main .features h2 {
+  margin-top: 10rem;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.index-main .features p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.index-main .features img{
+  width: 100%;
+  height: auto;
+}
+
+.index-main .features .f-one h3, .index-main .features .f-two h3, .index-main .features .f-three h3{
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.index-main .features .f-one p, .index-main .features .f-two p, .index-main .features .f-three p{
+  width: 100%;
+  font-size: 1.2rem;
+}
+
+
+.index-main .operations{
+  padding: 3rem;
+  height: 35rem;
+  background: #e5e7eb;
+}
+
+.o-slides i{
+  font-size: 3rem;
+}
+
+.o-slides .icon-con{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.index-main .o-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.index-main .slide{
+  margin-top: 7rem;
+  line-height: 2em;
+}
+
+.index-main .o-buttons .o-btn1{
+  background: #818cf8;
+  color: #fff;
+  border-radius: 1rem;
+  border: none;
+  padding: 0.5rem;
+}
+
+.index-main .o-buttons .o-btn2{
+  background: #34d399;
+  color: #fff;
+  border-radius: 1rem;
+  border: none;
+  padding: 0.5rem;
+}
+
+.index-main .o-buttons .o-btn3{
+  background: #f87171;
+  color: #fff;
+  border-radius: 1rem;
+  border: none;
+  padding: 0.5rem;
+}
+
+.index-main .o-buttons .o-btn1, .index-main .o-buttons .o-btn2, .index-main .o-buttons .o-btn3{
+  font-size: 1.5rem;
+  width: 80%;
+  height: 5rem;
+}
+
+.index-main .testimonials-section{
+  background: #ffffff;
+}
+
+.index-main .testimonials-section img{
+  width: 15%;
+}
+
+
+.index-main .testimonials{
+  width: 30rem;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+}
+
+.t-slides i{
+  font-size: 3rem;
+}
+
+.index-main .testimonials h2{
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.index-main .testimonials p{
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.index-main .testimonials .t-slider{
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.index-main .testimonials .t-slider h5{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.index-main .testimonials .t-slides{
+  min-width: 100%;
+  padding: 2rem;
+  text-align: center;
+  line-height: 2em;
+}
+
+.index-main .testimonials .t-slides blockquote{
+  width: 60%;
+  margin: 0 auto;
+}
+
+.indicators{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -20rem;
+  font-size: 3rem;
+  padding: 1rem;
+}
+
+.indicators:hover{
+  cursor: pointer;
+}
+
+
+.dots{
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  top: -4rem;
+  font-size: 3rem;
+  padding: 1rem;
+}
+
+.dots button{
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+}
+
+.btn-dot{
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+}
+
+.btn-dot:hover{
+  cursor: pointer;
+}
+
+.main-page-content footer{
+  background: #e5e7eb;
+}
+
+.footer-links img{
+  width: 10rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.footer-links ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.footer-links ul li {
+  list-style-type: none;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+}
+
+.main-page-content footer .copyright{
+  text-align: center;
+  padding: 1rem;
+}
+
+
+
+/* This is the transaction.html styling  */
+
+.t-header {
+  border-bottom: solid 0.1rem #444;
+}
+
+.t-header .first--message{
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 2rem;
+}
+
+.tSub--nav form {
+  margin-bottom: 3rem;
+  display: block;
+}
+
+.tSub--nav input {
+  width: 10rem;
+  text-align: center;
+  border: none;
+  border-radius: 4rem;
+  height: 3rem;
+  color: #000;
+}
+
+.tSub--nav input::placeholder {
+  color: #000;
+}
+
+.t-pass-view{
+  position: relative;
+  left: 1rem;
+  font-size: 1.5rem;
+}
+
+.t-pass-view:hover{
+  cursor: pointer;
+}
+
+.tsign-in{
+  font-size: 3rem;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  background: none;
+  border: none;
+}
+
+.tsign-in:hover{
+  cursor: pointer;
+}
+
+.tSub--nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+}
+
+.tSub--nav ul{
+  display: block;
+  margin: o auto;
+  text-align: center;
+  font-size: 2rem;
+}
+
+
+.tSub--nav ul li {
+  display: block;
+  margin: o auto;
+  text-align: center;
+}
+
+.t-main{
+  padding: 2rem;
+  animation: dropBounce 0.6s ease;
+}
+
+.total-balance, .deposit, .withdraw{
+  font-size: 1.2rem;
+}
+
+.current-balance{
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.balance-content{
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.balance-section, .transfer-section, .request-section, .close-section{
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.balance-section{
+  background: #ffffff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+.balance-section div{
+  border-bottom: solid 0.1rem #e0e0e0;
+}
+
+.balance-section div:nth-last-of-type(1){
+  border-bottom: none;
+}
+
+.transfer-section{
+  background: linear-gradient(135deg, #5f9cff, #4f7cff);
+  height: 12rem;
+  padding: 2rem;
+  color: #fff;
+}
+
+.transfer-section input, .close-section input, .request-section input{
+  width: 80%;
+  border-radius: 1rem;
+  border: none;
+  padding: 0.4rem;
+}
+
+.transfer-section input::placeholder, .close-section input::placeholder, .request-section input::placeholder{
+  text-align: center;
+}
+
+.transfer-section .t-con, .close-section .c-con{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+
+.transfer-section .t-con p{
+  position: relative;
+  margin-inline-start: 1.5rem;
+}
+
+.transfer-section .t-con button{
+  height: 2rem;
+  width: 4rem;
+  margin-top: -1rem;
+}
+
+.request-section{
+  background: linear-gradient(135deg, #39d98a, #20c997);
+  height: 12rem;
+  padding: 2rem;
+  color: #fff;
+}
+
+.request-section h2{
+  margin-bottom: 2rem;
+}
+
+.request-section .r-con{
+  display: flex;
+  align-items: center;
+}
+
+.request-section .r-con button{
+  height: 2rem;
+  width: 4rem;
+  margin-top: -0.1rem;
+}
+
+.close-section{
+  background: linear-gradient(135deg, #ff5c5c, #ff3b3b);
+  height: 12rem;
+  padding: 2rem;
+  color: #fff;
+}
+
+.close-section .c-con button{
+  height: 2rem;
+  width: 4rem;
+}
+
+.info-con{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  padding: 0.1rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-con1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.in, .out,.interest-rate{
+  font-size: 1rem;
+}
+
+.ascend, .descend{
+  font-size:2rem;
+}
+
+.ascend:hover, .descend:hover{
+  cursor: pointer;
+}
+
+
+
+/* this is about us page styling */
+.about-main h2{
+  text-align: left;
+  padding: 1rem;
+}
+
+.about-main p{
+  text-align: justify;
+  padding: 1rem;
+  line-height: 2rem;
+}
+
+
+/* This is the contact us page styling */
+
+.contact-main h2{
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.contact-main p{
+  text-align: justify;
+  padding: 1rem;
+  line-height: 2rem;
+}
+
+.contact-main div{
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #4f46e5;
+  line-height: 2.5rem;
+}
+
+.contact-main ul li:hover{
+  cursor: pointer;
+}
+
+/* This is the privacy  page styling */
+.privacy-main h2{
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.privacy-main p{
+  text-align: justify;
+  padding: 1rem;
+  line-height: 2rem;
+}
+
+/* This is the term of use  page styling */
+.term-main h2{
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.term-main p{
+  text-align: justify;
+  padding: 1rem;
+  line-height: 2rem;
+}
+
+/* This is the wait list page styling */
+.wait-main h2{
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.wait-main p{
+  text-align: justify;
+  padding: 1rem;
+  line-height: 2rem;
+  margin-bottom: 3rem;
+}
+
+.wait-main form{
+  text-align: center;
+}
+
+.wait-main label{
+  font-size: 1rem;
+}
+
+.wait-main input{
+  width: 15rem;
+  height: 3rem;
+  border-radius: 3rem;
+  margin-bottom: 2rem;  
+  text-align: center;
+}
+
+.wait-main button{
+  width: 9rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: #4f7cff;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+
+
+/* desktop stylying */
+@media screen and (min-width: 768px){
+/* index.html styling */
+
+.first-visit .first-intro {
+  font-size: 2rem;
+}
+
+.first-visit input{
+  width: 25rem;
+  height: 5rem;
+}
+
+.first-visit .sign-up{
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.first-visit .first--details{
+  margin-top: 3rem;
+  margin-bottom: 0rem;
+  margin-inline-start: 1rem;
+  gap: 2rem;
+}
+
+.first-visit .second--details{
+  gap: 1rem;
+  margin-inline-start: 2.5rem;
+  margin-bottom: 0;
+}
+
+.first-visit .second--details .pass-view{
+  margin-top: 0.9rem;
+}
+
+.first-visit .sign-up {
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+}
+
+.sign-up .btn-sign-up{
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  font-size: 5rem;
+}
+
+.first-visit .login--input{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0;
+}
+
+.first-visit .login .pass-view{
+  margin-top: 0.8rem;
+}
+
+.first-visit .login .btn-log-in{
+  background: none;
+  border: none;
+  font-size: 5rem;
+}
+
+.pass-view{
+  position: inherit;
+  top: 1rem;
+}
+
+.first--button button{
+  margin: 0 auto;
+  border: none;
+  width: 15rem;
+  font-size: 1.5rem;
+  background: #818cf8;
+  color: #fff;
+  border-radius: 3rem;
+  height: 5rem;
+  text-transform: capitalize;
+}
+
+/* this is the main-page-content styling */
+.form-con{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+}
+
+.first--details{
+  position: relative;
+  display: flex;
+  gap: 1rem;
+}
+
+.second--details{
+  position: relative;
+  display: flex;
+  gap: 0.2rem;
+}
+
+.pass-view{
+  position: relative;
+  left: 1rem;
+  top: 0.3rem;
+  font-size: 1.5rem;
+}
+
+.pass-view:hover{
+  cursor: pointer;
+}
+
+.main-page-content nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.main-page-content nav img {
+  max-width: 15rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.main-page-content nav input {
+  width: 10rem;
+  text-align: center;
+  border: none;
+  border-radius: 4rem;
+  height: 3rem;
+  color: #000;
+}
+
+.main-page-content nav input::placeholder {
+  color: #000;
+}
+
+.main-page-content nav button {
+  width: 5rem;
+  border: none;
+  font-size: 2rem;
+  background: none;
+}
+
+.main-page-content nav .main-nav-links a {
+  font-size: 2rem;
+}
+
+.main-page-content nav .main-nav-links a:hover {
+  font-size: 2rem;
+}
+
+.main-page-content header h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 2rem;
+  text-transform: capitalize;
+  width: 57%;
+  margin: 0 auto;
+  line-height: 3em;
+}
+
+.main-page-content header h1 span,
+header strong {
+  padding: 0.8rem;
+  background: #818cf8;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.main-page-content header .intro {
+  padding: 2rem;
+  text-align: justify;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 2rem;
+}
+
+.main-page-content header .learn-more {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.banner-one, .banner-two{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+
+.banner-one div h2, .banner-two div h2{
+  font-size: 3rem;
+}
+
+.banner-one div p, .banner-two div p{
+  font-size: 1.5rem;
+  text-align: justify;
+}
+
+.intro-img1{
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+} 
+
+.desktop-view{
+  display: block;
+}
+
+.mobile-view{
+  display: none;
+}
+
+.index-main .features h2{
+  font-size: 4rem;
+}
+
+.index-main .features .f-p{
+  font-size: 2rem;
+  text-align: center;
+}
+
+.index-main .features .f-one, .index-main .features .f-two, .index-main .features .f-three{
+  margin-bottom: 3rem;
+}
+
+.index-main .features h3{
+  font-size: 2rem;
+}
+
+.index-main .o-slides h3{
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.index-main .o-slides .slide i{
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.index-main .testimonials-section h2{
+  font-size: 4rem;
+}
+
+.index-main .testimonials-section p{
+  font-size: 1.5rem;
+}
+
+.index-main .testimonials{
+  width: 70rem;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+}
+
+.index-main .testimonials-section .t-slides blockquote{
+  font-size: 1.3rem;
+}
+
+.index-main .testimonials-section .t-slides img{
+  width: 6rem;
+  margin-top: 2rem;
+}
+
+
+.index-main .testimonials-section .t-slides h5, .index-main .testimonials-section .t-slides h6{
+  font-size: 1.5rem;
+}
+
+.index-main .testimonials-section .t-slides .testimonial__location{
+  font-size: 2rem;
+}
+
+
+.footer-links ul {
+  font-size: 2rem;
+}
+
+.main-page-content footer p {
+  font-size: 1.5rem;
+}
+
+
+
+/* sign in styling for transaction page */
+  .t-header .first--message{
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 2rem;
+  }
+
+
+  .t-nav form input{
+    width: 25rem;
+    height: 5rem;
+  }
+
+  .tsign-in{
+    position: relative;
+    font-size: 5rem;
+    margin-left: 5rem;
+    top: 1rem;
+  }
+
+
+  .t-main{
+    padding: 2rem;
+  }
+
+  .transaction-page{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: minmax(auto);
+    gap: 2rem;
+  }
+
+  .balance-section{
+    grid-row: span 3;
+  }
+
+
+
+  /* this is about us page styling */
+  .about-main h2{
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .about-main p{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+  }
+
+
+  /* This is the contact us page styling */
+
+  .contact-main h2{
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .contact-main p{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+  }
+
+  .contact-main div{
+    font-size: 2rem;
+  }
+
+  /* This is the privacy  page styling */
+  .privacy-main h2{
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .privacy-main p{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+  }
+
+  /* This is the term of use  page styling */
+  .term-main h2{
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .term-main p{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+  }
+
+  /* This is the wait list page styling */
+  .wait-main h2{
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .wait-main p{
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+  }
+
+  .wait-main label{
+    font-size: 1.5rem;
+  }
+
+  .wait-main button{
+    width: 10rem;
+  }
+
+}
+
+
+/* Keyframes  */
+@keyframes dropBounce {
+  0% {
+    transform: translateY(0rem);
+  }
+
+  60% {
+    transform: translateY(10rem);
+  }
+
+  100% {
+    transform: translateY(0rem);
+  }
+}

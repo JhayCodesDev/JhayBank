@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shorcut icon" href="./favicon.ico" type="image/x-favicon">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap"
+    rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="https://kit.fontawesome.com/9571898d36.js" crossorigin="anonymous"></script>
+    <script defer src="./script.js"></script>
+    
+    <title>JHAY BANK</title>
+  </head>
+  <body>
+    <div class="first-visit">
+      <p class="first-intro">Login / Open an Account to get started.</p>
+        <img src="./jhay-bank-logo-bg.png" alt="Jhay-Bank-logo" />
+
+        <form class="sign-up">
+          <div class="form-con">
+           <div class="first--details">
+             <input
+              type="text"
+              class="fname"
+              placeholder="first--name"
+            />
+            <input
+              type="text"
+              class="lname"
+              placeholder="last--name"
+            />
+           </div>
+            <div class="second--details">
+              <input
+              type="text"
+              class="user--name"
+              placeholder="user--name"
+              maxlength="5"
+              />&nbsp;&nbsp;
+              <span class="password"><input
+                type="password"
+                class="user--pin"
+                placeholder="user--pin"
+                maxlength="4"
+              /><i class="pass-view bi bi-eye-slash"></i></span>
+            </div>
+            <button type="submit" class="btn-sign-up">&rarr;</button>
+          </div>
+        </form>
+
+        <form class="login">
+          <div class="login--input">
+            <input
+            type="text"
+            class="existing-user--name existing"
+            placeholder="user--name"
+            maxlength="5"
+          />&nbsp;&nbsp;
+          <span class="password"><input
+            type="password"
+            class="existing-user--pin"
+            placeholder="user--pin"
+            maxlength="4"
+          
+          /><i class="pass-view bi bi-eye-slash" class=""></i></span>
+          </div>
+          <button type="submit" class="btn-log-in">&rarr;</button>
+        </form>
+
+
+        <div class="first--button">
+          <button class="open--account">open account</button>
+          <button class="log--in">Log In</button>
+        </div>
+    </div>
+
+    <div class="main-page-content">
+      <header class="main-header">
+      <nav>
+        <img src="./jhay-bank-logo-bg.png" alt="Jhay-Bank-logo" />
+
+        <div class="main-nav-links">
+          <ul>
+            <li><a href="#features" class="nav__link">features</a></li>
+            <li><a href="#operations" class="nav__link">operations</a></li>
+            <li><a href="#testimonials" class="nav__link">testimonials</a></li>
+            <li><a href="./transaction.html" class="nav__link">transactions</a></li>
+          </ul>
+        </div>
+      </nav>
+
+
+      <h1>Banking <span>built</span> for the <strong>people's future</strong></h1>
+      <p class="intro">Jhay banking gives you full control of your money - fast transfers, accessible loans, and complete transparency  - all in one secure, minimalist platform</p>
+      <p class="learn-more"><a href="#features">Learn More &darr;</a><p>
+
+      <div class="banner-one">
+        <img src="./mobile-view.png" alt="mobile-view" class="intro-img1 mobile-view">
+        <img src="./desktop-view.png" alt="desktop-view" class="intro-img1 desktop-view">
+        <div>
+          <h2>100% digital banking</h2>
+          <p>Manage your finances anytime, anywhere with a seamless and fully digital banking experience.</p>
+        </div>
+      </div>
+
+      <div class="banner-two">
+        <div>
+          <h2>Watch your money grow</h2>
+          <p>Stay in control of your finances, monitor your activity, and watch your money grow over time.</p>
+        </div>
+        <img src="./grow.png" alt="" class="banner-img2">
+      </div>
+      </header>
+
+    <main class="index-main">
+      <section class="features" id="features">
+        <h2>Features</h2>
+        <p class="f-p">Everything you need in a modern bank and more.</p>
+        <div class="f-one">
+          <img src="./istockphoto-1129401378-612x612.jpg" alt="secure-your-account">
+          <div>
+            <h3>🔐 Advance Security</h3>
+            <p>Multi-layer encryption and account protection to keep your finance safe at all times.</p>
+          </div>
+        </div>
+
+        <div class="f-two">
+          <img src="./insight.jpg" alt="insight">
+          <div>
+            <h3>📊 Smart Account Insights</h3>
+            <p>Track your spending, deposits and withdrawals with clear financial summaries.</p>
+          </div>
+        </div>
+
+        <div class="f-three">
+          <img src="./notification.jpg" alt="notification">
+          <div>
+            <h3>⚡Real time Notifications</h3>
+            <p>Get instants alerts for every transactions so you're always in control.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="operations" id="operations">
+        <div class="o-buttons">
+          <button class="o-btn1" data-slide="0"><span>🔁</span>Transfer Funds</button>
+          <button class="o-btn2" data-slide="1"><span>💰</span>Loans</button>
+          <button class="o-btn3" data-slide="2"><span>❌</span>Close Account</button>
+        </div>
+
+        <div class="o-slides">
+          <div class="slide o-side-one active">
+            <div class="icon-con"><i class="bi bi-send-fill"></i></div>
+            <h3>Send money securely in seconds. Whether you're paying a freind or managing business payments, Jhay Banking ensures every transaction is fast, encrypted and reliable.</p>
+          </div>
+
+          <div class="slide o-slide-two hide-content">
+            <div class="icon-con"><i class="bi bi-cash-stack"></i></div>
+            <h3>Access flexible loan options designed to support your goals. Transparent interest rates, no hidden charges, and a straightforward approval process.</p>
+          </div>
+
+          <div class="slide o-slide-three hide-content">
+            <div class="icon-con"><i class="bi bi-person-exclamation"></i></div>
+            <h3>We believe in freedom. Close your account anytime with no penalties. Your data and balance are handles securely and transparently.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials-section" id="testimonials">
+        <div class="testimonials">
+          <h2>Testimonials</h2>
+          <p>Reviews From Our Trusted Partners</p>
+
+          <div class="t-slider">
+            <div class="t-slides">
+              <h5 class="testimonial-header">
+              Finally free from old-school banks
+              </h5>
+              <blockquote class="testimonial-text">
+              <i class="bi bi-quote"></i> Jhay Banking makes managing my money effortless. The interface is clean and everything works smoothly.
+              </blockquote>
+              <address class="testimonial-author">
+                <img src="./user-icon.png" alt="user-photo" class="testimonial-photo" />
+                <h6 class="testimonial__name">Sofia Garcia</h6>
+                <p class="testimonial__location">Valencia, Spain</p>
+              </address>
+            </div>
+
+            <div class="t-slides">
+              <h5 class="testimonial-header">
+              Finally free from old-school banks
+              </h5>
+              <blockquote class="testimonial-text">
+              <i class="bi bi-quote"></i> I love how simple transfers are. No complications, no delays - just banking that work.
+              </blockquote>
+              <address class="testimonial-author">
+                <img src="./user-icon.png" alt="user-photo" class="testimonial-photo" />
+                <h6 class="testimonial-name">Emily Carter</h6>
+                <p class="testimonial-location">Vancouver, Canada</p>
+              </address>
+            </div>
+
+            <div class="t-slides">
+              <h5 class="testimonial-header">
+              Finally free from old-school banks
+              </h5>
+              <blockquote class="testimonial-text">
+              <i class="bi bi-quote"></i> Finally, a banking app that feels modern but still trustworthy.
+              </blockquote>
+              <address class="testimonial-author">
+                <img src="./user-icon.png" alt="user-photo" class="testimonial-photo" />
+                <h6 class="testimonial-name">Francisco Gomes</h6>
+                <p class="testimonial-location">Lisbon, Portugal</p>
+              </address>
+            </div>
+          </div>
+          
+          <div class="indicators">
+            <span class="prev">&lt;</span>
+            <span class="next">&gt;</span>
+          </div>
+
+          <div class="dots">
+             <button data-t_slides="0"><i class="btn-dot bi bi-circle"></i></button>
+            <button data-t_slides="1"><i class="btn-dot bi bi-circle"></i></button>
+            <button data-t_slides="2"><i class="btn-dot bi bi-circle"></i></button>
+            <!-- <button class="btn-dot active-dot" data-t_slides="0"><i class="bi bi-circle"></i></button>
+            <button class="btn-dot" data-t_slides="1"><i class="bi bi-circle"></i></button>
+            <button class="btn-dot" data-t_slides="2"><i class="bi bi-circle"></i></button> -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="index-footer">
+      <div class="footer-links">
+        <ul>
+            <li><a href="./about_us.html">about</a></li>
+            <li><a href="./term_of_use.html">term of use</a></li>
+            <li><a href="./privacy.html">privacy policy</a></li>
+            <li><a href="./wait_list.html">wait list</a></li>
+            <li><a href="./contact.html">contact us</a></li>
+          </ul>
+          <img src="./jhay-bank-logo-bg.png" alt="footer_logo">
+      </div>
+
+      <p class="copyright">&copy; Copyright by Joshua Odusanya(JhayCodes). Built to display my skills in HTML, CSS, & JavaScript</p>
+    </footer>
+    </div>
+  </body>
+</html>
