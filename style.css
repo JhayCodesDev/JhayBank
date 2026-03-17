@@ -14,6 +14,7 @@ body {
   color: #444;
   background-color: #f3f3f3;
   height: 100vh;
+
 }
 
 h1, h2, h3, h4, h5{
@@ -56,6 +57,11 @@ h1, h2, h3, h4, h5{
   left: 1rem;
   top: 0.1rem;
   font-size: 1.5rem;
+}
+
+.p-one{
+  position: relative;
+  left: 1.5rem;
 }
 
 .pass-view:hover{
@@ -108,6 +114,11 @@ h1, h2, h3, h4, h5{
 
 .first-visit .second--details .pass-view{
   margin-top: 0.3rem;
+}
+
+.first-visit .user--pin{
+  position: relative;
+  left: 0.3rem;
 }
 
 .sign-up .btn-sign-up{
@@ -196,8 +207,7 @@ nav img {
   width: 100%;
   margin: 0rem;
   padding: 0rem;
-  color: #1f2937;
-  background: #fff;
+  background: #1e293b;
   z-index: 1000;
 }
 
@@ -230,10 +240,10 @@ nav .main-nav-links a:hover {
 
 .main-page-content header h1 {
   font-size: 1.3rem;
-  text-align: left;
+  text-align: center;
   margin-top: 2rem;
   text-transform: capitalize;
-  width: 57%;
+  width: 100%;
   margin: 0 auto;
   line-height: 3em;
 }
@@ -252,6 +262,7 @@ nav .main-nav-links a:hover {
   text-align: justify;
   width: 80%;
   margin: 0 auto;
+  line-height: 2rem;
 }
 
 .main-page-content header .learn-more {
@@ -259,6 +270,7 @@ nav .main-nav-links a:hover {
   text-align: center;
   font-size: 1.5rem;
   padding: 1rem;
+  margin-top: 2rem;
 }
 
 .main-page-content header .learn-more a {
@@ -275,6 +287,7 @@ nav .main-nav-links a:hover {
   justify-content: space-around;
   padding: 1rem;
   gap: 2rem;
+  margin-top: 5rem;
 }
 
 .banner-img2{
@@ -553,18 +566,8 @@ nav .main-nav-links a:hover {
   color: #000;
 }
 
-.t-pass-view{
-  position: relative;
-  left: 1rem;
-  font-size: 1.5rem;
-}
-
-.t-pass-view:hover{
-  cursor: pointer;
-}
-
 .tsign-in{
-  font-size: 3rem;
+  font-size: 4rem;
   margin-left: 1rem;
   margin-top: 2rem;
   background: none;
@@ -575,7 +578,7 @@ nav .main-nav-links a:hover {
   cursor: pointer;
 }
 
-.tSub--nav ul {
+.t-nav ul {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -584,18 +587,12 @@ nav .main-nav-links a:hover {
   padding: 2rem;
 }
 
-.tSub--nav ul{
+.t-nav ul{
   display: block;
   margin: o auto;
   text-align: center;
-  font-size: 2rem;
-}
-
-
-.tSub--nav ul li {
-  display: block;
-  margin: o auto;
-  text-align: center;
+  font-size: 3rem;
+  color: #4f7cff;
 }
 
 .t-main{
@@ -671,9 +668,10 @@ nav .main-nav-links a:hover {
 }
 
 .transfer-section .t-con button{
-  height: 2rem;
-  width: 4rem;
+  height: 3rem;
+  width: 5rem;
   margin-top: -1rem;
+  font-size: 2rem;
 }
 
 .request-section{
@@ -693,8 +691,9 @@ nav .main-nav-links a:hover {
 }
 
 .request-section .r-con button{
-  height: 2rem;
-  width: 4rem;
+  height: 3rem;
+  width: 5rem;
+  font-size: 2rem;
   margin-top: -0.1rem;
 }
 
@@ -706,8 +705,9 @@ nav .main-nav-links a:hover {
 }
 
 .close-section .c-con button{
-  height: 2rem;
-  width: 4rem;
+  height: 3rem;
+  width: 5rem;
+  font-size: 2rem;
 }
 
 .info-con{
@@ -732,7 +732,7 @@ nav .main-nav-links a:hover {
 }
 
 .ascend, .descend{
-  font-size:2rem;
+  font-size: 3rem;
 }
 
 .ascend:hover, .descend:hover{
@@ -743,7 +743,7 @@ nav .main-nav-links a:hover {
 
 /* this is about us page styling */
 .about-main h2{
-  text-align: left;
+  text-align: center;
   padding: 1rem;
 }
 

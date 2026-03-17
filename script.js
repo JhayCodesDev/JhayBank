@@ -102,6 +102,7 @@ if(openAccount && LogIn){
     // Hide form and hide main content for user to login
     hideForm(signUpForm, form1);
     mainPageContent.style.display = "none";
+    location.reload();
 
     openAccount.disabled = false;
     LogIn.disabled = false;
@@ -152,12 +153,14 @@ if(passView && openAccount && LogIn){
     span.forEach(val => {
       const input = val.querySelector("input");
       if(input.type === "password"){
-        pass.classList.toggle("bi-eye-lash")
         input.type = "text"
+        pass.classList.remove("bi-eye")
+        pass.classList.add("bi-eye-slash")
       }
       else if(input.type === "text"){
-        pass.classList.toggle("bi-eye")
         input.type = "password"
+        pass.classList.remove("bi-eye-slash")
+        pass.classList.add("bi-eye")
       }
     })
 
@@ -185,7 +188,6 @@ controlSlide.forEach((control) => {
 
 ////// testimonails slides
 if(testimonialSlider){
-  ////working on Testimonail slides
 let index = 0;
 ///////control testimonial slides
 controlTestimonialSlides.forEach((control) => {
@@ -345,6 +347,7 @@ const descend = document.querySelector(".descend");
 const In = document.querySelector(".in");
 const Out = document.querySelector(".out")
 
+
 /////password type change and icon toggle for transaction page
 if(tlogIn){
   const pass = document.querySelector(".pass-view");
@@ -353,13 +356,15 @@ if(tlogIn){
     const span = document.querySelector(".password")
 
     const input = span.querySelector("input");
-      if(input.type === "password"){
-        pass.classList.toggle("bi-eye-lash")
+       if(input.type === "password"){
         input.type = "text"
+        pass.classList.remove("bi-eye")
+        pass.classList.add("bi-eye-slash")
       }
       else if(input.type === "text"){
-        pass.classList.toggle("bi-eye")
         input.type = "password"
+        pass.classList.remove("bi-eye-slash")
+        pass.classList.add("bi-eye")
       }
     })
 }
@@ -486,7 +491,10 @@ if(tlogIn){
         if(val <= (this.balance() * 0.03)){
           this.movDate.push(new Date().toISOString());
           this.movements.push(val);
-          alert(`Hello ${capitalized}, your loan has been granted and it has been updated to your balance`)
+          alert("Loan Processing....");
+          setTimeout(function(){
+            alert(`Hello ${capitalized}, your loan has been granted and it has been updated to your balance`)
+          }, 1000)
         }else {
           alert(`Hello ${capitalized}, we can't process your loan at the moment`)
         }
@@ -625,6 +633,7 @@ if(tlogIn){
       moneyOut.textContent = displayCurrency();
 
     transferAmount.value = "";
+    recipient.value = "";
 
   })
 
@@ -671,7 +680,7 @@ if(tlogIn){
   time--;
   timer.textContent = `${min}:${sec}`
   if(time === 58){
-    alert(`Hello ${capitalized}, you'd be logged out in the next 1 min.`)
+    alert(`Hello ${capitalized}, you will be logged out in less than 1 minute.`)
   }
   if(time === -1){
     clearInterval(timerFunction);
