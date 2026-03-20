@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-US">
    <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +38,7 @@
                 autocomplete="on"
               /><i class="pass-view bi bi-eye"></i></span>
             </div>
-            <button type="submit" class="tsign-in">&rarr;</button>
+            <button type="submit" class="tsign-in">Log In</button>
           </form>
         </div>
 
@@ -57,6 +57,7 @@
 
         <p class="total-balance">1000000</p>
       </div>
+
       <div class="transaction-page">
         <section class="balance-section deposit">
           <div class="balance-content">
@@ -64,18 +65,19 @@
             <p class="deposit">1000000</p>
           </div>
         </section>
+
         <section class="transfer-section">
           <h2>Transfer Money</h2>
           <div class="t-con">
             <div class="t-input">
-              <input type="text" maxlength="5" class="recipient" id="recipient" placeholder="Recipient">
+              <input type="text" maxlength="5" class="recipient" pattern="[A-Za-z ]+" id="recipient" placeholder="Recipient">
               <p>Transfer to:</p>
             </div>
               <div class="t-input">
                 <input type="number" class="t-amount" id="t-amount" placeholder="Amount" max="6">
                 <p>Amount</p>
             </div>
-            <button class="btn-transfer">&rarr;</button>
+            <button class="btn-transfer">Send</button>
           </div>
         </section>
 
@@ -86,7 +88,7 @@
               <input type="number" class="request-amount" id="request" placeholder="Amount">
             </div>
             
-            <button class="btn-request">&rarr;</button>
+            <button class="btn-request">Request</button>
           </div>
         </section>
 
@@ -94,12 +96,12 @@
           <h2>Close Account</h2>
           <div class="c-con">
             <div class="c-input">
-              <input type="text" maxlength="5" class="c-user" id="Username" placeholder="Username">
+              <input type="text" maxlength="5" class="c-user" id="Username" pattern="[A-Za-z ]+" placeholder="Username">
             </div>
             <div class="c-input">
               <input type="password" class="c-pin" id="User-pin" placeholder="Pin" maxlength="4">
             </div>
-            <button class="btn-close">&rarr;</button>
+            <button class="btn-close">Close</button>
           </div>
         </section>
       </div>
@@ -130,5 +132,15 @@
         </div>
       </section>
     </main>
+
+    <div id="toast" class="toast hide"></div>
+    <div id="processing" class="processing hide">
+      <span class="p-text">Processing</span>
+      <i class="bi bi-arrow-repeat spinner"></i>
+    </div>
+    <div id="success" class="success hide"></div>
+    <div id="error" class="error hide"></div>
+    <div id="warning" class="warning hide"></div>
   </body>
+
 </html>

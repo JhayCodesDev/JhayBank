@@ -18,6 +18,7 @@
   </head>
   <body>
     <div class="first-visit">
+      <div id="toast" class="toast hide"></div>
       <p class="first-intro">Login / Open an Account to get started.</p>
         <img src="./jhay-bank-logo-bg.png" alt="Jhay-Bank-logo" />
 
@@ -49,7 +50,7 @@
                 maxlength="4"
               /><i class="pass-view bi bi-eye p-one"></i></span>
             </div>
-            <button type="submit" class="btn-sign-up">&rarr;</button>
+            <button type="submit" class="btn-sign-up">Create Account</button>
           </div>
         </form>
 
@@ -69,7 +70,7 @@
           
           /><i class="pass-view bi bi-eye" class=""></i></span>
           </div>
-          <button type="submit" class="btn-log-in">&rarr;</button>
+          <button type="submit" class="btn-log-in">Sign In</button>
         </form>
 
 
@@ -80,6 +81,7 @@
     </div>
 
     <div class="main-page-content">
+      <div id="toast-one" class="toast hide"></div>
       <header class="main-header">
       <nav>
         <img src="./jhay-bank-logo-bg.png" alt="Jhay-Bank-logo" />
@@ -100,8 +102,8 @@
       <p class="learn-more"><a href="#features">Learn More &darr;</a><p>
 
       <div class="banner-one">
-        <img src="./mobile-view.png" alt="mobile-view" class="intro-img1 mobile-view">
-        <img src="./desktop-view.png" alt="desktop-view" class="intro-img1 desktop-view">
+        <img src="./mobile view.png" alt="mobile-view" class="intro-img1 mobile-view">
+        <img src="./Desktop view.png" alt="desktop-view" class="intro-img1 desktop-view">
         <div>
           <h2>100% digital banking</h2>
           <p>Manage your finances anytime, anywhere with a seamless and fully digital banking experience.</p>
@@ -109,7 +111,7 @@
       </div>
 
       <div class="banner-two">
-        <div>
+        <div class="banner-content">
           <h2>Watch your money grow</h2>
           <p>Stay in control of your finances, monitor your activity, and watch your money grow over time.</p>
         </div>
@@ -229,9 +231,6 @@
              <button data-t_slides="0"><i class="btn-dot bi bi-circle"></i></button>
             <button data-t_slides="1"><i class="btn-dot bi bi-circle"></i></button>
             <button data-t_slides="2"><i class="btn-dot bi bi-circle"></i></button>
-            <!-- <button class="btn-dot active-dot" data-t_slides="0"><i class="bi bi-circle"></i></button>
-            <button class="btn-dot" data-t_slides="1"><i class="bi bi-circle"></i></button>
-            <button class="btn-dot" data-t_slides="2"><i class="bi bi-circle"></i></button> -->
           </div>
         </div>
       </section>
@@ -252,5 +251,6 @@
       <p class="copyright">&copy; Copyright by Joshua Odusanya(JhayCodes). Built to display my skills in HTML, CSS, & JavaScript</p>
     </footer>
     </div>
+    <div id="error" class="error hide"></div>
   </body>
 </html>
