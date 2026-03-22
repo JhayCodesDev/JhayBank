@@ -348,7 +348,7 @@ nav .main-nav-links a:hover {
 }
 
 .index-main .features {
-  padding: 3rem;
+  padding: 2rem;
   background: #eef2ff;
 }
 
@@ -370,8 +370,14 @@ nav .main-nav-links a:hover {
 
 .index-main .features img{
   width: 100%;
+  max-width: auto;
   height: auto;
 }
+
+.index-main .features .f-two .two, .index-main .features .f-three .two{
+    display: none;
+   }
+
 
 .index-main .features .f-one h3, .index-main .features .f-two h3, .index-main .features .f-three h3{
   font-size: 1.3rem;
@@ -540,6 +546,8 @@ nav .main-nav-links a:hover {
 
 .main-page-content footer{
   background: #e5e7eb;
+  height: 25rem;
+  padding: 5rem;
 }
 
 .footer-links img{
@@ -1339,9 +1347,7 @@ nav .main-nav-links a:hover {
   }
 
   .banner-two img {
-    position: relative;
-    top: -3rem;
-    left: -4rem;
+    margin-top: -10rem;
   }
 
   .index-main .features h2{
@@ -1356,6 +1362,31 @@ nav .main-nav-links a:hover {
   .index-main .features .f-one, .index-main .features .f-two, .index-main .features .f-three{
     margin-bottom: 3rem;
   }
+
+  .index-main .features .f-one, .index-main .features .f-two, .index-main .features .f-three{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .index-main .features .f-one img, .index-main .features .f-two img, .index-main .features .f-three img{
+    width: 50%;
+  }
+
+  .index-main .features .f-two img{
+    display: block;
+    text-align: right;
+  }
+
+  .index-main .features .f-two .one, .index-main .features .f-three .two{
+    display: none;
+   }
+
+   .index-main .features .f-two .two{
+    display: block;
+   }
+
 
   .index-main .features h3{
     font-size: 2rem;
