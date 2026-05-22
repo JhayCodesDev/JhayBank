@@ -646,6 +646,11 @@ nav .main-nav-links a:hover {
   width: 10rem;
 }
 
+.bi-house-fill{
+  font-size: 3rem;
+  color: #6366f1;
+}
+
 .t-header .first--message{
   font-size: 1rem;
 }
@@ -1106,11 +1111,15 @@ margin-bottom: 3rem;
 
 .profile-card h1, .profile-card .profile-span{
   font-size: 3rem;
+  line-height: 1;
 }
 
 .profile-card .profile-span{
+  font-size: 3rem;
   position: relative;
-  top: 0.5rem;
+  font-weight: 600;
+  top: 0.15rem;
+  line-height: 1;
 }
 
 .profile-card p{

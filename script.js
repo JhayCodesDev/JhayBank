@@ -169,8 +169,9 @@ LogIn.addEventListener("click", () => {
       const lastname = userLname.value;
       const username = mainUser.value;
       const password = mainPass.value;
-      const accountNumber = getAccountNumber()
-      const newUser = {firstname, lastname, username, password, accountNumber}
+      const accountNumber = getAccountNumber();
+      const profileImage = [];
+      const newUser = {firstname, lastname, username, password, accountNumber, profileImage}
 
       const storedUsers = JSON.parse(localStorage.getItem("Users")) || [];
 
@@ -481,37 +482,37 @@ const btnLogOut = document.querySelector(".btn-logOut");
 
 // password type change and icon toggle for transaction page
 if(tlogIn){
-  const pass = document.querySelector(".pass-view");
-  pass.addEventListener("click", function(e){
-    e.preventDefault();
-    const span = document.querySelector(".password")
+    const pass = document.querySelector(".pass-view");
+    pass.addEventListener("click", function(e){
+        e.preventDefault();
+        const span = document.querySelector(".password")
 
-    const input = span.querySelector("input");
-       if(input.type === "password"){
-        input.type = "text"
-        pass.classList.remove("bi-eye")
-        pass.classList.add("bi-eye-slash")
-      }
-      else if(input.type === "text"){
-        input.type = "password"
-        pass.classList.remove("bi-eye-slash")
-        pass.classList.add("bi-eye")
-      }
+        const input = span.querySelector("input");
+        if(input.type === "password"){
+            input.type = "text"
+            pass.classList.remove("bi-eye")
+            pass.classList.add("bi-eye-slash")
+        }
+        else if(input.type === "text"){
+            input.type = "password"
+            pass.classList.remove("bi-eye-slash")
+            pass.classList.add("bi-eye")
+        }
     })
 }
 
 // initially hide transaction main page
 if(transactionPage){
-  transactionPage.style.display = "none";
+    transactionPage.style.display = "none";
 }
 
 // local currency set up
 const localCurrency = {
-NG: "NGN",
-US: "USD",
-GB: "GBP",
-CA: "CAD",
-EU: "EUR",
+    NG: "NGN",
+    US: "USD",
+    GB: "GBP",
+    CA: "CAD",
+    EU: "EUR",
 };
 
 const locale = navigator.language;
@@ -519,10 +520,10 @@ const country = locale.split("-")[1];
 const currency = localCurrency[country];
 
 function displayCurrency () {
-return new Intl.NumberFormat(locale, {
-style: "currency",
-currency: currency
-}).format(balance)
+    return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency
+    }).format(balance)
 }
 
 // Assigned Internal Balance
@@ -531,27 +532,29 @@ let balance = 1000000;
 
 // Updated Balance
 if(totalBalance && moneyIn) {
-  totalBalance.forEach(total => {
-  total.textContent =  displayCurrency();
-    moneyIn.textContent = displayCurrency()
-})
+    totalBalance.forEach(total => {
+      total.textContent =  displayCurrency();
+      moneyIn.textContent = displayCurrency()
+    })
 }
 
 
 // diffrence between dates sections
- function daysPassed  (date1, date2) {
-  const diff = Math.abs(date2 - date1);
-  return Math.round(diff / (1000 * 60 * 60 * 24))
+function daysPassed  (date1, date2) {
+    const diff = Math.abs(date2 - date1);
+    return Math.round(diff / (1000 * 60 * 60 * 24))
 }
 
 // Elements specific to Transaction Nav
 const navToggler = document.querySelector(".nav-toggle")
 const navLinks = document.querySelector(".nav-links")
 
-navToggler.addEventListener("click", function(e){
-    e.preventDefault();
-    navLinks.classList.contains("hide-content") ? navLinks.classList.remove("hide-content") : navLinks.classList.add("hide-content")
-})
+if(navToggler){
+  navToggler.addEventListener("click", function(e){
+      e.preventDefault();
+      navLinks.classList.contains("hide-content") ? navLinks.classList.remove("hide-content") : navLinks.classList.add("hide-content")
+  })
+}
 
 
 // Submitted Form for Tansaction Page
@@ -559,70 +562,141 @@ if(tlogIn){
   tlogIn.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // function to display saved image uploaded to the website
-  function displaySavedImgae () {
-    const savedImage = localStorage.getItem("ProfileImage");
-    const userDetails = localStorage.getItem("User");
-
-    if(savedImage){
-      preview.src = savedImage;
-    } else{
-      preview.src = "./jhay-bank-logo.jpg"
-    }
-  }
-
     const users = JSON.parse(localStorage.getItem("Users")) || [];
     const foundUser = users.find(user => user.username === tUserName.value && user.password === tPass.value);
-    const getCorrectObject = users.find(user => user.username === tUserName.value && user.password === tPass.value);
 
-    if(foundUser && getCorrectObject){
+    if(foundUser){
+      //stored ussername and password for updating the user profile image
+      const usernameValue = tUserName.value;
+      const passwordValue = tPass.value;
 
-    // Show transaction page and hide form
-    tForm.style.display = "none";
-    transactionPage.style.display = "block";
-    displaySavedImgae();
-    ShowToast(`Hi ${tUserName.value}, you've successfully logged in!`);
+      //displaySavedImage function
+      function displaySavedImage () {
+        const getStoredUsers = JSON.parse(localStorage.getItem("Users"));
+        const foundStoredUser = getStoredUsers.find(user => user.username === usernameValue && user.password === passwordValue);
+        if(foundStoredUser.profileImage.length === 0){
+          preview.src = "./jhay-bank-logo.jpg"
+        } else {
+          preview.src = foundStoredUser.profileImage;
+        }
+      }
 
-    //update account number text content
-    accountNumber.textContent = foundUser.accountNumber;
-    profileAcc.textContent = foundUser.accountNumber;
+      displaySavedImage();
 
-    //copy account number to clipboard
-    btnCopy.forEach(btn => {
-      btn.addEventListener("click", function(e) {
-        e.preventDefault();
-        const text = accountNumber.textContent;
-        navigator.clipboard.writeText(text).then(() => ShowSuccess('copied successfully')).catch(() => ShowError('failed to copy'))
+      // button for uploading image to the website 
+      if(uploadImage){
+        uploadImage.addEventListener("click", function(e) {
+          fileInput.click();
+          fileInput.addEventListener("change", function(e) {
+            const file = this.files[0]
+            if(file){
+              const reader = new FileReader();
+              reader.onload = function(e){
+                const imageData = e.target.result;
+                preview.src = imageData;
+                const storedUsers = JSON.parse(localStorage.getItem("Users")) || [];
+                const loggedInUser = storedUsers.find(user =>
+                  user.username === usernameValue && user.password === passwordValue
+                );
+                loggedInUser.profileImage = imageData;
+                if(loggedInUser){
+                  storedUsers.push(loggedInUser);
+                  localStorage.setItem("Users", JSON.stringify(storedUsers));
+                }
+              }
+              reader.readAsDataURL(file);
+            }
+          })
+        });
+      }
+
+
+      // Show transaction page and hide form
+      tForm.style.display = "none";
+      transactionPage.style.display = "block";
+      
+      // displaySavedImage();
+      ShowToast(`Hi ${tUserName.value}, you've successfully logged in!`);
+
+      //update account number text content
+      accountNumber.textContent = foundUser.accountNumber;
+      profileAcc.textContent = foundUser.accountNumber;
+
+      // Capitalize firstname and lastname
+      const getFisrtName = foundUser.firstname;
+      const getLastName = foundUser.lastname;
+      const firstletterInFname = getFisrtName.at(0).toLocaleUpperCase();
+      const firstletterInLname = getLastName.at(0).toLocaleUpperCase();
+      const otherLettersInFname = getFisrtName.slice(1);
+      const otherLettersInLname = getLastName.slice(1);
+      const capitalizedFname = firstletterInFname + otherLettersInFname;
+      const capitalizedLname = firstletterInLname + otherLettersInLname;
+
+      // Greetings
+      const now = new Date();
+      const hr = now.getHours();
+      const message = hr < 12 ? `Good morning ${capitalizedFname}` : hr < 18 ? `Good Afternoon ${capitalizedFname}` : `Good Evening ${capitalizedFname}`;
+      greetings.textContent = message;
+
+      // copy account number to clipboard
+      btnCopy.forEach(btn => {
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          const text = accountNumber.textContent;
+          navigator.clipboard.writeText(text).then(() => ShowSuccess('copied successfully')).catch(() => ShowError('failed to copy'))
+        })
       })
-    })
 
-   //Togglers for displaying different transaction features and hiding others
-    accountButton.forEach(acc => {
-      acc.addEventListener("click", function(e){
-        e.preventDefault();
-        dashboard.style.display = "block";
-        transferContainer.classList.remove("transfer-flex");
-        transferContainer.classList.add("hide-content");
-        billsContainer.classList.add("hide-content");
-        billsContainer.classList.remove("bill-flex");
-        profileContainer.classList.add("hide-content");
-      })
-    });
-
-    paymentButton.forEach(pay => {
-      pay.addEventListener("click", function(e){
-        e.preventDefault();
-        billsContainer.classList.add("bill-flex");
-        billsContainer.classList.remove("hide-content");
-        dashboard.style.display = "none";
-        transferContainer.classList.remove("transfer-flex");
-        transferContainer.classList.add("hide-content");
-        profileContainer.classList.add("hide-content");
+      //Togglers for displaying different transaction features and hiding others
+      accountButton.forEach(acc => {
+        acc.addEventListener("click", function(e){
+          e.preventDefault();
+          dashboard.style.display = "block";
+          transferContainer.classList.remove("transfer-flex");
+          transferContainer.classList.add("hide-content");
+          billsContainer.classList.add("hide-content");
+          billsContainer.classList.remove("bill-flex");
+          profileContainer.classList.add("hide-content");
+        })
       });
-    });
 
-    transferButton.forEach(transfer => {
-      transfer.addEventListener("click", function(e){
+      paymentButton.forEach(pay => {
+        pay.addEventListener("click", function(e){
+          e.preventDefault();
+          billsContainer.classList.add("bill-flex");
+          billsContainer.classList.remove("hide-content");
+          dashboard.style.display = "none";
+          transferContainer.classList.remove("transfer-flex");
+          transferContainer.classList.add("hide-content");
+          profileContainer.classList.add("hide-content");
+        });
+      });
+
+      transferButton.forEach(transfer => {
+        transfer.addEventListener("click", function(e){
+          e.preventDefault();
+          transferContainer.classList.add("transfer-flex");
+          transferContainer.classList.remove("hide-content");
+          dashboard.style.display = "none";
+          billsContainer.classList.remove("bill-flex");
+          billsContainer.classList.add("hide-content")
+          profileContainer.classList.add("hide-content");
+        });
+      })
+
+      profileButton.forEach(profile => {
+        profile.addEventListener("click", function(e){
+          e.preventDefault();
+          profileContainer.classList.remove("hide-content");
+          dashboard.style.display = "none";
+          billsContainer.classList.remove("bill-flex");
+          billsContainer.classList.add("hide-content")
+          transferContainer.classList.remove("transfer-flex");
+          transferContainer.classList.add("hide-content");
+        });
+      })
+
+      transferFunds.addEventListener("click", function(e){
         e.preventDefault();
         transferContainer.classList.add("transfer-flex");
         transferContainer.classList.remove("hide-content");
@@ -630,160 +704,168 @@ if(tlogIn){
         billsContainer.classList.remove("bill-flex");
         billsContainer.classList.add("hide-content")
         profileContainer.classList.add("hide-content");
-      });
-    })
+      })
 
-    profileButton.forEach(profile => {
-      profile.addEventListener("click", function(e){
+      payBills.addEventListener("click", function(e){
         e.preventDefault();
-        profileContainer.classList.remove("hide-content");
+        billsContainer.classList.add("bill-flex");
+        billsContainer.classList.remove("hide-content")
         dashboard.style.display = "none";
-        billsContainer.classList.remove("bill-flex");
-        billsContainer.classList.add("hide-content")
         transferContainer.classList.remove("transfer-flex");
         transferContainer.classList.add("hide-content");
+        profileContainer.classList.add("hide-content");
       });
-    })
 
-    transferFunds.addEventListener("click", function(e){
-      e.preventDefault();
-      transferContainer.classList.add("transfer-flex");
-      transferContainer.classList.remove("hide-content");
-      dashboard.style.display = "none";
-      billsContainer.classList.remove("bill-flex");
-      billsContainer.classList.add("hide-content")
-      profileContainer.classList.add("hide-content");
-    })
+      // Hide sub nav
+      tForm.style.display = "none";
 
-
-    payBills.addEventListener("click", function(e){
-      e.preventDefault();
-      billsContainer.classList.add("bill-flex");
-      billsContainer.classList.remove("hide-content")
-      dashboard.style.display = "none";
-      accountButton.classList.add("hide-content");
-      transferContainer.classList.remove("transfer-flex");
-      transferContainer.classList.add("hide-content");
-      profileContainer.classList.add("hide-content");
-    });
-
-    // button for showing form for editing user profile.
-    btnChange.addEventListener("click", function(e) {
-      e.preventDefault();
-      displayChangeForm.classList.remove("hide-content");
-    });
-
-    // button for editing firstname and username as well as updating it in the local storage
-    submitDetails.addEventListener("click", function(e) {
-      e.preventDefault();
-      if(changeFirstName.value === "" || changeUserName.value === ""){
-        alert("input your firstname or lastname");
-      } else{
-        const newFirstName = changeFirstName.value;
-        const newLastName = changeLastName.value;
-        const newUserName = changeUserName.value;
-
-        const getUsers = JSON.parse(localStorage.getItem("Users"))
-        const getUserAccount = JSON.parse(localStorage.getItem("UserAccount"))
-        getUsers.find(user => {
-          if(user.accountNumber){
-            user.firstname = newFirstName;
-            user.username = newUserName;
-            user.lastname = newLastName;
-             localStorage.setItem("Users", JSON.stringify(getUsers))
-          }
-        });
-
-        getUserAccount.find(user => {
-          if(user.username){
-            user.username = newUserName;
-            localStorage.setItem("UserAccount", JSON.stringify(getUserAccount))
-          }
-        });
-
-        changeFirstName.value = "";
-        changeUserName.value = "";
-        changeLastName.value = "";
-        displayChangeForm.classList.add("hide-content");
+      // Timer
+      let time = 300;
+      const timerFunction = setInterval(()=>{
+      let min = Math.floor(time/60).toString().padStart(2,"0");
+      let sec = (time%60).toString().padStart(2,"0");
+      timer.textContent = `${min}:${sec}`;
+      if(time===60) ShowWarning(`Hello ${capitalizedFname}, you will be logged out in less than 1 minute.`);
+      if(time===0){
+        clearInterval(timerFunction);
         transactionPage.style.display="none";
         tForm.style.display="block";
+        tUserName.value="";
+        tPass.value="";
       }
-    });
+      time--;
+      },1000);
 
-    // button for logging user out
-    btnLogOut.addEventListener("click", function(e) {
-      e.preventDefault();
-      transactionPage.style.display="none";
-      tForm.style.display="block";
-      tUserName.value="";
-      tPass.value="";
-    });
+      // Current date display
+      function getCurrentDate() {
+        setTimeout(() => {
+          balance = new Date().toLocaleString();
+          currentDate.textContent = balance
+        }, 1000)
+      }
 
-    // Capitalize firstname and lastname
-    const getFisrtName = getCorrectObject.firstname;
-    const getLastName = getCorrectObject.lastname;
-    const firstletterInFname = getFisrtName.at(0).toLocaleUpperCase();
-    const firstletterInLname = getLastName.at(0).toLocaleUpperCase();
-    const otherLettersInFname = getFisrtName.slice(1);
-    const otherLettersInLname = getLastName.slice(1);
-    const capitalizedFname = firstletterInFname + otherLettersInFname;
-    const capitalizedLname = firstletterInLname + otherLettersInLname;
-
-    // Greetings
-    const now = new Date();
-    const hr = now.getHours();
-    const message = hr < 12 ? `Good morning ${capitalizedFname}` : hr < 18 ? `Good Afternoon ${capitalizedFname}` : `Good Evening ${capitalizedFname}`;
-    greetings.textContent = message;
-
-    // Hide sub nav
-    tForm.style.display = "none";
-
-    // Current date display
-    function getCurrentDate() {
-      setTimeout(() => {
-        balance = new Date().toLocaleString();
-        currentDate.textContent = balance
-      }, 1000)
-    }
-
-    // updates the firstname to be capitalized
-    profileH1.textContent = capitalizedFname;
-    profileSpan.textContent = capitalizedLname;
+      // updates the firstname to be capitalized
+      profileH1.textContent = capitalizedFname;
+      profileSpan.textContent = capitalizedLname;
 
 
-  // storing and creating different bills value to use when displaying the transaction history on the balance content section
-    const storedAirtime = JSON.parse(localStorage.getItem("Airtime")) || [];
-    const storedElect = JSON.parse(localStorage.getItem("Elect")) || [];
-    const storedSub = JSON.parse(localStorage.getItem("Sub")) || [];
+    // Buttons for purchasing airtime, subscription and electricity
+      airtimeBtn.addEventListener("click", function (e) {
+        e.preventDefault();
 
-    airtimeBtn.addEventListener("click", function (e) {
-      e.preventDefault();
+        if (airtimeAmount.value && phoneNumber.value){
+          const amount = Number(airtimeAmount.value);
+          const airtimeTransaction = {
+            type: "Airtime",
+            provider: network.value,
+            amount: amount,
+            date: new Date().toISOString()
+          };
 
-      if (airtimeAmount.value && phoneNumber.value){
-        const amount = Number(airtimeAmount.value);
-        const airtimeTransaction = {
-          type: "Airtime",
-          provider: network.value,
+          newAccount.addAirtime(airtimeTransaction);
+
+          newAccount.withdraw(amount);
+          saveAccount(newAccount);
+
+          balance = newAccount.balance();
+          totalBalance.forEach(total => {
+            return total.textContent = displayCurrency()
+          });
+
+          ShowProcessing();
+
+          setTimeout(() => {
+            balance = amount;
+            ShowSuccess(`Hello ${capitalizedFname}, your ${airtimeTransaction.provider} ${airtimeTransaction.type} Purchase of ${displayCurrency()} has been credited to ${phoneNumber.value} successfully`);
+            phoneNumber.value = "";
+          }, 3000);
+
+          moneyOut.textContent = new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: currency
+          }).format(newAccount.accAllOuts());
+
+          displayMovements(newAccount);
+
+          airtimeAmount.value = "";
+        } else{
+          ShowError(`Kindly input a phone number and amount`)
+        }
+      });
+
+      subscriptionBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        if (subAmount.value && subId.value){
+          const amount = Number(subAmount.value);
+          const subscriptionTransaction = {
+            type: "Subscription",
+            provider: tvSubscription.value,
+            amount: amount,
+            date: new Date().toISOString()
+          };
+
+          newAccount.addSubscription(subscriptionTransaction);
+
+          newAccount.withdraw(amount);
+          saveAccount(newAccount);
+
+          balance = newAccount.balance();
+            totalBalance.forEach(total => {
+            return total.textContent = displayCurrency();
+          });
+
+          ShowProcessing();
+
+          setTimeout(() => {
+            balance = amount;
+            ShowSuccess(`Hello ${capitalizedFname}, your ${subscriptionTransaction.provider} ${subscriptionTransaction.type} of ${displayCurrency()} for #${subId.value} has been completed successfully`);
+            subId.value = "";
+          }, 3000);
+
+          moneyOut.textContent = new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency: currency
+          }).format(newAccount.accAllOuts());
+
+          displayMovements(newAccount);
+
+          subAmount.value = "";
+
+        } else {
+          ShowError(`Kindly input a subscription id and amount`)
+        }
+      });
+
+      electricityBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (electAmount.value && electricityId.value){
+        const amount = Number(electAmount.value);
+        const electricityTransaction = {
+          type: "Electricity",
+          provider: distribution.value,
+          meterType: meter.value,
           amount: amount,
           date: new Date().toISOString()
         };
 
-        storedAirtime.push(airtimeTransaction);
-        localStorage.setItem("Airtime", JSON.stringify(storedAirtime));
+        newAccount.addElectricity(electricityTransaction);
 
         newAccount.withdraw(amount);
         saveAccount(newAccount);
 
         balance = newAccount.balance();
         totalBalance.forEach(total => {
-          return total.textContent = displayCurrency()
+          return total.textContent = displayCurrency();
         });
 
+        ShowProcessing();
+
         setTimeout(() => {
           balance = amount;
-          ShowSuccess(`Hello ${capitalizedFname}, your ${airtimeTransaction.provider} ${airtimeTransaction.type} Purchase of ${displayCurrency()} has been credited to ${phoneNumber.value} successfully`);
-          phoneNumber.value = "";
-        }, 2000);
+          ShowSuccess(`Hello ${capitalizedFname}, your ${electricityTransaction.provider} ${electricityTransaction.type} Purchase of ${displayCurrency()} for #${electricityId.value} has been completed successfully`);
+          electricityId.value = "";
+        }, 3000);
 
         moneyOut.textContent = new Intl.NumberFormat(locale, {
           style: "currency",
@@ -792,431 +874,431 @@ if(tlogIn){
 
         displayMovements(newAccount);
 
-        airtimeAmount.value = "";
+        electAmount.value = "";
       } else{
-        ShowError(`Kindly input a phone number and amount`)
+        ShowError(`Kindly input an electricity id and amount`)
       }
-    });
+      });
+      
+      // update the current date in the current balance
+      getCurrentDate();
 
-    subscriptionBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      if (subAmount.value && subId.value){
-        const amount = Number(subAmount.value);
-        const subscriptionTransaction = {
-          type: "Subscription",
-          provider: tvSubscription.value,
-          amount: amount,
-          date: new Date().toISOString()
-        };
-
-        storedSub.push(subscriptionTransaction);
-        localStorage.setItem("Sub", JSON.stringify(storedSub));
-
-        newAccount.withdraw(amount);
-        saveAccount(newAccount);
-
-        balance = newAccount.balance();
-          totalBalance.forEach(total => {
-            return total.textContent = displayCurrency();
-          });
-
-        setTimeout(() => {
-          balance = amount;
-          ShowSuccess(`Hello ${capitalizedFname}, your ${subscriptionTransaction.provider} ${subscriptionTransaction.type} of ${displayCurrency()} for #${subId.value} has been completed successfully`);
-          subId.value = "";
-        }, 2000);
-
-        moneyOut.textContent = new Intl.NumberFormat(locale, {
-          style: "currency",
-          currency: currency
-        }).format(newAccount.accAllOuts());
-
-        displayMovements(newAccount);
-
-        subAmount.value = "";
-
-      } else {
-        ShowError(`Kindly input a subscription id and amount`)
-      }
-    });
-
-    electricityBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      if (electAmount.value && electricityId.value){
-      const amount = Number(electAmount.value);
-      const electricityTransaction = {
-        type: "Electricity",
-        provider: distribution.value,
-        meterType: meter.value,
-        amount: amount,
-        date: new Date().toISOString()
-      };
-
-      storedElect.push(electricityTransaction);
-      localStorage.setItem("Elect", JSON.stringify(storedElect));
-      storedElect.push(electricityTransaction);
-      localStorage.setItem("Elect", JSON.stringify(storedElect));
-
-      newAccount.withdraw(amount);
-      saveAccount(newAccount);
-
-      balance = newAccount.balance();
-      totalBalance.forEach(total => {
-        return total.textContent = displayCurrency();
+      // button for showing form for editing user profile.
+      btnChange.addEventListener("click", function(e) {
+        e.preventDefault();
+        displayChangeForm.classList.remove("hide-content");
       });
 
-      setTimeout(() => {
-        balance = amount;
-        ShowSuccess(`Hello ${capitalizedFname}, your ${electricityTransaction.provider} ${electricityTransaction.type} Purchase of ${displayCurrency()} for #${electricityId.value} has been completed successfully`);
-        electricityId.value = "";
-      }, 2000);
+      // button for editing firstname and username as well as updating it in the local storage
+      submitDetails.addEventListener("click", function(e) {
+        e.preventDefault();
+        if(changeFirstName.value === "" || changeUserName.value === ""){
+          alert("input your firstname or lastname");
+        } else{
+          const newFirstName = changeFirstName.value;
+          const newLastName = changeLastName.value;
+          const newUserName = changeUserName.value;
 
-      moneyOut.textContent = new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency: currency
-      }).format(newAccount.accAllOuts());
+          const getUsers = JSON.parse(localStorage.getItem("Users"))
+          const getUserAccount = JSON.parse(localStorage.getItem("UserAccount"))
+          getUsers.find(user => {
+            if(user.accountNumber){
+              user.firstname = newFirstName;
+              user.username = newUserName;
+              user.lastname = newLastName;
+              localStorage.setItem("Users", JSON.stringify(getUsers))
+            }
+          });
 
-      displayMovements(newAccount);
+          getUserAccount.find(user => {
+            if(user.username){
+              user.username = newUserName;
+              localStorage.setItem("UserAccount", JSON.stringify(getUserAccount))
+            }
+          });
 
-      electAmount.value = "";
-    } else{
-      ShowError(`Kindly input an electricity id and amount`)
-    }
-    });
-
-    // button for uploading image to the website 
-    uploadImage.addEventListener("click", function(e) {
-      fileInput.click();
-      fileInput.addEventListener("change", function(e) {
-        const file = this.files[0]
-        if(file){
-          const reader = new FileReader();
-
-          reader.onload = function(e){
-            const imageData = e.target.result;
-            preview.src = imageData;
-
-            localStorage.setItem("ProfileImage", imageData)
-          }
-          reader.readAsDataURL(file);
+          changeFirstName.value = "";
+          changeUserName.value = "";
+          changeLastName.value = "";
+          displayChangeForm.classList.add("hide-content");
+          transactionPage.style.display="none";
+          tForm.style.display="block";
+          clearInterval(timerFunction);
         }
-      })
-    });
-    
-    // update the current date in the current balance
-    getCurrentDate();
+      });
 
-    // Class Object
-    class Accounts {
-      #pin;
-      #movements;
-      #movDates;
-      #allOuts;
+      // Class Object
+      class Accounts {
+        #pin;
+        #movements;
+        #movDates;
+        #allOuts;
+        #airtime;
+        #electricity;
+        #subscription;
 
-      constructor(username, pin, movements = [1000000], movDates = [new Date().toISOString()], allOuts = [0]) {
-        this.username = username;
-        this.#pin = pin;
-        this.#allOuts = [...allOuts];
-        this.#movements = [...movements];
-        this.#movDates = [...movDates];
-      }
+        constructor(
+          username, 
+          pin, 
+          movements = [1000000], movDates = [new Date().toISOString()], 
+          allOuts = [0], 
+          airtime = [], 
+          electricity = [], 
+          subscription = []){
 
-      deposit(val) {
-        this.#movements.push(val);
-        this.#movDates.push(new Date().toISOString());
-      }
+          this.username = username;
+          this.#pin = pin;
 
-      withdraw(val) {
-        this.#allOuts.push(val);
-        this.#movements.push(-val);
-        this.#movDates.push(new Date().toISOString());
-      }
+          this.#allOuts = [...allOuts];
+          this.#movements = [...movements];
+          this.#movDates = [...movDates];
 
-      balance() {
-        return this.#movements.reduce((acc, val) => acc + val, 0);
-      }
+          this.#airtime = [...airtime];
+          this.#electricity = [...electricity];
+          this.#subscription = [...subscription];
+        }
 
-      interest() {
-        return this.balance() * 0.03;
-      }
-
-      request(val) {
-        if(val <= this.balance() * 0.03){
+        deposit(val) {
           this.#movements.push(val);
           this.#movDates.push(new Date().toISOString());
-          ShowProcessing();
-          setTimeout(() => {
-            const loanAmount = Number(val)
-            balance = loanAmount
-            ShowSuccess(`Hello ${capitalizedFname}, your loan of ${displayCurrency()} has been approved and added to your balance`);
-          }, 3000);
-        } else {
-          ShowError(`Hello ${capitalizedFname}, we're unable to approve your loan at the time`);
+        }
+
+        withdraw(val) {
+          this.#allOuts.push(val);
+          this.#movements.push(-val);
+          this.#movDates.push(new Date().toISOString());
+        }
+
+        addAirtime(data) {
+          this.#airtime.push(data);
+        }
+
+        addElectricity(data) {
+          this.#electricity.push(data);
+        }
+
+        addSubscription(data) {
+          this.#subscription.push(data);
+        }
+
+        balance() {
+          return this.#movements.reduce((acc, val) => acc + val, 0);
+        }
+
+        interest() {
+          return this.balance() * 0.03;
+        }
+
+        request(val) {
+          if(val <= this.balance() * 0.03){
+
+            this.#movements.push(val);
+            this.#movDates.push(new Date().toISOString());
+
+            ShowProcessing();
+
+            setTimeout(() => {
+              const loanAmount = Number(val)
+
+              balance = loanAmount
+
+              ShowSuccess(`Hello ${capitalizedFname}, your loan of ${displayCurrency()} has been approved and added to your balance`);
+
+            }, 3000);
+
+          } else {
+
+            ShowError(`Hello ${capitalizedFname}, we're unable to approve your loan at the time`);
+
+          }
+        }
+
+        accAllOuts() {
+          return this.#allOuts.reduce((acc, val) => acc + val, 0);
+        }
+
+        get pin() {
+          return this.#pin;
+        }
+
+        get movements() {
+          return [...this.#movements];
+        }
+
+        get movDates() {
+          return [...this.#movDates];
+        }
+
+        get allOuts() {
+          return [...this.#allOuts];
+        }
+
+        get airtime() {
+          return [...this.#airtime];
+        }
+
+        get electricity() {
+          return [...this.#electricity];
+        }
+
+        get subscription() {
+          return [...this.#subscription];
+        }
+
+        toStorageObject() {
+          return {
+            username: this.username,
+            pin: this.pin,
+            movements: this.movements,
+            movDates: this.movDates,
+            allOuts: this.allOuts,
+
+            airtime: this.airtime,
+            electricity: this.electricity,
+            subscription: this.subscription
+          }
         }
       }
 
-      accAllOuts() {
-        return this.#allOuts.reduce((acc, val) => acc + val, 0);
+      // filters old account and stores fresh object
+      function saveAccount(account){
+        const stored = JSON.parse(localStorage.getItem("UserAccount")) || [];
+        const filtered = stored.filter(acc => acc.username !== account.username);
+        filtered.push(account.toStorageObject());
+        localStorage.setItem("UserAccount", JSON.stringify(filtered));
       }
 
-      get pin() { return this.#pin; }
-      get movements() { return [...this.#movements]; }
-      get movDates() { return [...this.#movDates]; }
-      get allOuts() { return [...this.#allOuts]; }
+      // returns a proper class instance
+      function loadAccount(username, pin){
+        const stored = JSON.parse(localStorage.getItem("UserAccount")) || [];
 
-      toStorageObject() {
-        return {
-          username: this.username,
-          pin: this.pin,
-          movements: this.movements,
-          movDates: this.movDates,
-          allOuts: this.allOuts
-        }
-      }
-    }
+        const storedUser = stored.find(
+          acc => acc.username === username && acc.pin === pin
+        );
 
-    // filters old account and stores fresh object
-    function saveAccount(account){
-      const stored = JSON.parse(localStorage.getItem("UserAccount")) || [];
-      const filtered = stored.filter(acc => acc.username !== account.username);
-      filtered.push(account.toStorageObject());
-      localStorage.setItem("UserAccount", JSON.stringify(filtered));
-    }
+        if(!storedUser) return null;
 
-    // returns a proper class instance
-    function loadAccount(username, pin){
-      const stored = JSON.parse(localStorage.getItem("UserAccount")) || [];
-      const storedUser = stored.find(acc => acc.username === username && acc.pin === pin);
-      if(!storedUser) return null;
-      return new Accounts(
-        storedUser.username,
-        storedUser.pin,
-        storedUser.movements,
-        storedUser.movDates,
-        storedUser.allOuts
-      );
-    }
-
-    function displayMovements(account, sort = false, direction = "asc") {
-      const container = balanceSection[0];
-      container.innerHTML = "";
-
-      let mov = account.movements.map((m, i) => ({
-        amount: m,
-        date: account.movDates[i],
-        type: m > 0 ? "Deposit" : "Withdraw",
-        provider: "",
-        meterType: ""
-      }));
-
-      const airtime = (JSON.parse(localStorage.getItem("Airtime")) || []).map(t => ({
-        amount: -t.amount,
-        date: t.date,
-        type: "Airtime",
-        provider: t.provider,
-        meterType: ""
-      }));
-
-      const sub = (JSON.parse(localStorage.getItem("Sub")) || []).map(t => ({
-        amount: -t.amount,
-        date: t.date,
-        type: "Subscription",
-        provider: t.provider,
-        meterType: ""
-      }));
-
-      const elec = (JSON.parse(localStorage.getItem("Elect")) || []).map(t => ({
-        amount: -t.amount,
-        date: t.date,
-        type: "Electricity",
-        provider: t.provider,
-        meterType: t.meterType
-      }));
-
-      mov = [...mov, ...airtime, ...sub, ...elec];
-
-      mov.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      if (sort) {
-        mov.sort((a, b) =>
-        direction === "asc" ? a.amount - b.amount : b.amount - a.amount
+        return new Accounts(
+          storedUser.username,
+          storedUser.pin,
+          storedUser.movements,
+          storedUser.movDates,
+          storedUser.allOuts,
+          storedUser.airtime,
+          storedUser.electricity,
+          storedUser.subscription
         );
       }
 
-      mov = mov.slice(0, 8);
+      // display movements function
+      function displayMovements(account, sort = false, direction = "asc") {
+        const container = balanceSection[0];
+        container.innerHTML = "";
 
-      mov.forEach(item => {
-        let title = "";
-        let extra = "";
+        let mov = account.movements.map((m, i) => ({
+          amount: m,
+          date: account.movDates[i],
+          type: m > 0 ? "Deposit" : "Withdraw",
+          provider: "",
+          meterType: ""
+        }));
 
-        if (item.type === "Deposit") {
-          title = "Deposit";
-        } else if (item.type === "Withdraw") {
-          title = "Withdraw";
-        } else if (item.type === "Electricity") {
-          title = "Electricity Bill";
-          extra = `${item.provider} (${item.meterType})`;
-        } else if (item.type === "Airtime") {
-          title = "Airtime";
-          extra = item.provider;
-        } else if (item.type === "Subscription") {
-          title = "Subscription";
-          extra = item.provider;
+        const airtime = account.airtime.map(t => ({
+          amount: -t.amount,
+          date: t.date,
+          type: "Airtime",
+          provider: t.provider,
+          meterType: ""
+        }));
+
+        const sub = account.subscription.map(t => ({
+          amount: -t.amount,
+          date: t.date,
+          type: "Subscription",
+          provider: t.provider,
+          meterType: ""
+        }));
+
+        const elec = account.electricity.map(t => ({
+          amount: -t.amount,
+          date: t.date,
+          type: "Electricity",
+          provider: t.provider,
+          meterType: t.meterType
+        }));
+
+        mov = [...mov, ...airtime, ...sub, ...elec];
+
+        mov.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (sort) {
+          mov.sort((a, b) =>
+          direction === "asc" ? a.amount - b.amount : b.amount - a.amount
+          );
         }
 
-      balance = Math.abs(item.amount)
+        mov = mov.slice(0, 8);
 
-        const html = `
-        <div class="balance-content">
-          <div class="balance-row">
-            <div>
-              <h3 class="${item.amount > 0 ? "in" : "out"}">${title} <span class="provider">${extra}</span></h3>
-              <span class="mov-date">
-                ${new Date(item.date).toLocaleDateString()}
-              </span>
+        mov.forEach(item => {
+          let title = "";
+          let extra = "";
+
+          if (item.type === "Deposit") {
+            title = "Deposit";
+          } else if (item.type === "Withdraw") {
+            title = "Withdraw";
+          } else if (item.type === "Electricity") {
+            title = "Electricity Bill";
+            extra = `${item.provider} (${item.meterType})`;
+          } else if (item.type === "Airtime") {
+            title = "Airtime";
+            extra = item.provider;
+          } else if (item.type === "Subscription") {
+            title = "Subscription";
+            extra = item.provider;
+          }
+
+        balance = Math.abs(item.amount)
+
+          const html = `
+          <div class="balance-content">
+            <div class="balance-row">
+              <div>
+                <h3 class="${item.amount > 0 ? "in" : "out"}">${title} <span class="provider">${extra}</span></h3>
+                <span class="mov-date">
+                  ${new Date(item.date).toLocaleDateString()}
+                </span>
+              </div>
+            </div>
+
+            
+
+            <div class="balance-row second-row">
+              <p class="${item.amount > 0 ? "in" : "out"}">
+                ${item.amount > 0 ? "+" : "-"}${displayCurrency()}
+              </p>
             </div>
           </div>
+          `;
+          container.insertAdjacentHTML("beforeend", html);
+        });
+      }
 
+      // Load or create new account
+      let newAccount = loadAccount(tUserName.value, tPass.value);
+      if(newAccount){
+        balance = newAccount.balance();
+        totalBalance.forEach(total => {
+          total.textContent = displayCurrency();
+        });
+
+        ////Updating All Out
+          balance = Number(newAccount.accAllOuts());
+          moneyOut.textContent = displayCurrency()
+      }
+
+      if(!newAccount){
+        newAccount = new Accounts(tUserName.value, tPass.value);
+        saveAccount(newAccount);
+      }
+      displayMovements(newAccount);
+
+      // Sorting movements
+      ascend.addEventListener("click", () => {
+        displayMovements(newAccount, true, "asc");
+      });
+
+      descend.addEventListener("click", () => {
+        displayMovements(newAccount, true, "desc");
+      });
+
+      // Transfer Funds
+      btnTransfer.addEventListener("click",()=>{
+        if(!transferAmount.value) return;
+        if(recipient.value === "") return
+        const amount = Number(transferAmount.value);
+        const recipientName = recipient.value;
+        ShowProcessing()
+        //Delay Success
+        setTimeout(() => {
+          balance = amount
+          displayCurrency()
+          ShowSuccess(`${displayCurrency()} sent to ${recipientName}`)
+        }, 3000);
+        newAccount.withdraw(amount);
+        saveAccount(newAccount);
+        displayMovements(newAccount);
+
+        const updatedBalance = newAccount.balance();
+
+        balance = updatedBalance;
+        totalBalance.forEach(total => {
+          total.textContent = displayCurrency();
+        })
+
+        //update Current Date
+        getCurrentDate()
+
+
+
+        // Calculating money out
+        moneyOut.textContent = Number(moneyOut.textContent.replace(/[^0-9.-]+/g, "")) + Number(transferAmount.value)
+          balance = moneyOut.textContent;
+          moneyOut.textContent = displayCurrency();
+
+          transferAmount.value = "";
+          recipient.value = "";
+      });
+
+      // Loan Request
+      btnRequest.addEventListener("click",()=>{
+        if(!requestAmount.value) return;
+        const amount = Number(requestAmount.value);
+        newAccount.request(amount);
+        saveAccount(newAccount);
+        displayMovements(newAccount);
+
+        //update Current date
+        getCurrentDate()
+
+        const updatedBalance = newAccount.balance();
+
+        balance = updatedBalance;
+        totalBalance.forEach(total => {
+          total.textContent = displayCurrency()
+        })
           
-
-          <div class="balance-row second-row">
-            <p class="${item.amount > 0 ? "in" : "out"}">
-              ${item.amount > 0 ? "+" : "-"}${displayCurrency()}
-            </p>
-          </div>
-        </div>
-        `;
-        container.insertAdjacentHTML("beforeend", html);
-      });
-    }
-
-    // Load or create new account
-    let newAccount = loadAccount(tUserName.value, tPass.value);
-    if(newAccount){
-      balance = newAccount.balance();
-      totalBalance.forEach(total => {
-        total.textContent = displayCurrency();
+        requestAmount.value = "";
       });
 
-      ////Updating All Out
-        balance = Number(newAccount.accAllOuts());
-        moneyOut.textContent = displayCurrency()
-    }
-
-    if(!newAccount){
-      newAccount = new Accounts(tUserName.value, tPass.value);
-      saveAccount(newAccount);
-    }
-    displayMovements(newAccount);
-
-    // Sorting
-    ascend.addEventListener("click", () => {
-      displayMovements(newAccount, true, "asc");
-    });
-
-    descend.addEventListener("click", () => {
-      displayMovements(newAccount, true, "desc");
-    });
-
-
-    // Transfer
-    btnTransfer.addEventListener("click",()=>{
-      if(!transferAmount.value) return;
-      if(recipient.value === "") return
-      const amount = Number(transferAmount.value);
-      const recipientName = recipient.value;
-      ShowProcessing()
-      //Delay Success
-      setTimeout(() => {
-        balance = amount
-        displayCurrency()
-        ShowSuccess(`${displayCurrency()} sent to ${recipientName}`)
-      }, 3000);
-      newAccount.withdraw(amount);
-      saveAccount(newAccount);
-      displayMovements(newAccount);
-
-      const updatedBalance = newAccount.balance();
-
-      balance = updatedBalance;
-      totalBalance.forEach(total => {
-        total.textContent = displayCurrency();
-      })
-
-      //update Current Date
-      getCurrentDate()
-
-
-
-      // Calculating money out
-      moneyOut.textContent = Number(moneyOut.textContent.replace(/[^0-9.-]+/g, "")) + Number(transferAmount.value)
-        balance = moneyOut.textContent;
-        moneyOut.textContent = displayCurrency();
-
-        transferAmount.value = "";
-        recipient.value = "";
-    });
-
-    // Loan Request
-    btnRequest.addEventListener("click",()=>{
-      if(!requestAmount.value) return;
-      const amount = Number(requestAmount.value);
-      newAccount.request(amount);
-      saveAccount(newAccount);
-      displayMovements(newAccount);
-
-      //update Current date
-      getCurrentDate()
-
-      const updatedBalance = newAccount.balance();
-
-      balance = updatedBalance;
-      totalBalance.forEach(total => {
-        total.textContent = displayCurrency()
-      })
-        
-      requestAmount.value = "";
-    });
-
-    // Close Account
-    btnClose.addEventListener("click",()=>{
-      const stored = JSON.parse(localStorage.getItem("UserAccount")) || [];
-      const index = stored.findIndex(acc=>acc.username===cUser.value && acc.pin===cPass.value);
-      if(index>=0){
-        stored.splice(index,1);
-        localStorage.setItem("UserAccount", JSON.stringify(stored));
+      // button for logging user out
+      btnLogOut.addEventListener("click", function(e) {
+        e.preventDefault();
         transactionPage.style.display="none";
         tForm.style.display="block";
-        greetings.textContent="";
-        ShowError("We're sorry to see you go. We hope to see you again.");
-      } else {
-        ShowError("Incorrect Username or Pin. Please try again.");
-      }
-    });
+        tUserName.value="";
+        tPass.value="";
+      });
 
-    // Timer
-    let time = 300;
-    const timerFunction = setInterval(()=>{
-    let min = Math.floor(time/60).toString().padStart(2,"0");
-    let sec = (time%60).toString().padStart(2,"0");
-    timer.textContent = `${min}:${sec}`;
-    if(time===60) ShowWarning(`Hello ${capitalizedFname}, you will be logged out in less than 1 minute.`);
-    if(time===0){
-      clearInterval(timerFunction);
-      transactionPage.style.display="none";
-      tForm.style.display="block";
-      tUserName.value="";
-      tPass.value="";
-    }
-    time--;
-    },1000);
+      // Close Account
+      btnClose.addEventListener("click",()=>{
+        const stored = JSON.parse(localStorage.getItem("UserAccount")) || [];
+        const foundCorrectUser = stored.find(acc=>acc.username === cUser.value && acc.pin === cPass.value);
+        if(foundCorrectUser){
+          ShowError("We're sorry to see you go. We hope to see you again.");
+          localStorage.clear();
+          greetings.textContent="";
+          transactionPage.style.display="none";
+          tForm.style.display="block";
+        } else {
+          ShowError("Incorrect Username or Pin. Please try again.");
+        }
+      });
 
     } else {
       ShowError("Incorrect username or pin. Please try again or sign up on the home page.");
     }
-
-    tUserName.value="";
-    tPass.value="";
+      tUserName.value="";
+      tPass.value="";
   });
 }
